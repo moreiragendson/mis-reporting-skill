@@ -47,7 +47,7 @@ review-checklist.md
 ### macOS / Linux
 
 ```bash
-git clone https://github.com/gendsonmoreira/mis-reporting-skill.git
+git clone https://github.com/moreiragendson/mis-reporting-skill.git
 mkdir -p "${CLAUDE_CONFIG_DIR:-$HOME/.claude}/skills"
 cp -R mis-reporting-skill/skills/mis-report \
       "${CLAUDE_CONFIG_DIR:-$HOME/.claude}/skills/"
@@ -58,7 +58,7 @@ For Codex, replace the destination with `$HOME/.agents/skills/`.
 ### Windows (PowerShell)
 
 ```powershell
-git clone https://github.com/gendsonmoreira/mis-reporting-skill.git
+git clone https://github.com/moreiragendson/mis-reporting-skill.git
 $dest = Join-Path $env:USERPROFILE ".claude\skills"
 New-Item -ItemType Directory -Force $dest | Out-Null
 Copy-Item -Recurse -Force `

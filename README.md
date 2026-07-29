@@ -59,7 +59,7 @@ Paste this into Claude Code or a compatible agent:
 ```
 Install or update the MIS Reporting skill as a standalone skill for the client
 I am using. Read and follow
-https://github.com/gendsonmoreira/mis-reporting-skill/blob/main/INSTALL.md
+https://github.com/moreiragendson/mis-reporting-skill/blob/main/INSTALL.md
 ```
 
 Or install manually — see [INSTALL.md](INSTALL.md) for the directory mapping.
