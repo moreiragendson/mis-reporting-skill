@@ -1,0 +1,23 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# BI tool artifacts
+*.twbr
+*.twb.bak
+*.hyper
+*.tde
+*.pbix.bak
+~$*.pbix
+*.pbip/.pbi/localSettings.json
+
+# Local scratch
+scratch/
+tmp/
+*.log

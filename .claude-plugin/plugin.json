@@ -1,0 +1,25 @@
+{
+  "name": "mis-report",
+  "version": "0.1.0",
+  "description": "Management information (MIS) reporting skill for Tableau and Power BI: data modelling, measures and calculated fields, comparison metrics (YoY/MoM/YTD, budget variance), number formatting, visual design, filters, row-level security, and report governance.",
+  "author": {
+    "name": "Gendson Moreira"
+  },
+  "homepage": "https://github.com/gendsonmoreira/mis-reporting-skill",
+  "repository": "https://github.com/gendsonmoreira/mis-reporting-skill",
+  "license": "MIT",
+  "keywords": [
+    "tableau",
+    "power-bi",
+    "dax",
+    "mis",
+    "reporting",
+    "dashboard",
+    "business-intelligence",
+    "kpi",
+    "data-visualization"
+  ],
+  "skills": [
+    "./skills/mis-report"
+  ]
+}

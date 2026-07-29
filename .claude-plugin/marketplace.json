@@ -1,0 +1,29 @@
+{
+  "name": "mis-reporting",
+  "owner": {
+    "name": "Gendson Moreira",
+    "url": "https://github.com/gendsonmoreira"
+  },
+  "metadata": {
+    "description": "Management information reporting skills for Tableau and Power BI.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "mis-report",
+      "source": "./",
+      "description": "MIS reporting for Tableau and Power BI: data modelling, measures, comparison metrics, formatting, visual design, filters, security, and governance.",
+      "version": "0.1.0",
+      "license": "MIT",
+      "keywords": [
+        "tableau",
+        "power-bi",
+        "dax",
+        "mis",
+        "reporting",
+        "dashboard",
+        "business-intelligence"
+      ]
+    }
+  ]
+}
