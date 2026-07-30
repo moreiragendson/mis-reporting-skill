@@ -115,6 +115,7 @@ tool's vocabulary into the other's.
 | Restrict rows by user | Row-level security (RLS) roles | User filters / row-level security on the data source |
 | Speed up big data | Import mode, aggregations, composite models | Extracts (`.hyper`), aggregated extracts |
 | Cross-visual interaction | Edit interactions, cross-filter/highlight | Dashboard actions (filter, highlight, parameter) |
+| Formatted text in a tooltip | Measures in the *Tooltips* well; a `FORMAT` string measure for one-line output | Tooltip editor with `<AGG(...)>` tokens — a string calc would discard formatting and locale |
 | Navigate to detail | Drill-through page | Dashboard action to a detail sheet |
 | Diagnostics | Performance Analyzer, DAX Studio | Performance Recorder |
 | Version-controlled source | `.pbip` (folder of text files) | `.twb` (XML) — not `.twbx` |

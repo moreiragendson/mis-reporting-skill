@@ -5,9 +5,9 @@ into a competent **management information reporting** partner: data modelling,
 measure design, comparison metrics, number formatting, visual design, filters,
 security, and report governance — for **both Tableau and Power BI**.
 
-> **Status: in development.** `SKILL.md` and `comparison-metrics.md` are
-> complete. The other eight reference files are detailed outlines with final
-> section structure, being filled in progressively. See
+> **Status: in development.** `SKILL.md`, `comparison-metrics.md`, and
+> `visual-design.md` are complete. The other seven reference files are detailed
+> outlines with final section structure, being filled in progressively. See
 > [Roadmap](#roadmap).
 
 ---
@@ -112,9 +112,10 @@ skills/mis-report/
 - [x] Repository scaffold and packaging
 - [x] `SKILL.md` — core principles, workflow, tool parity, routing
 - [x] `comparison-metrics.md` — the worked reference file
+- [x] `visual-design.md` — chart selection, IBCS, colour, tooltips, accessibility
 - [ ] `data-model.md`
 - [ ] `calculations-powerbi.md` / `calculations-tableau.md`
-- [ ] `number-formatting.md` / `visual-design.md`
+- [ ] `number-formatting.md`
 - [ ] `filters-interactivity.md` / `report-architecture.md`
 - [ ] `performance-governance.md` / `review-checklist.md`
 - [ ] Worked examples in `examples/`
