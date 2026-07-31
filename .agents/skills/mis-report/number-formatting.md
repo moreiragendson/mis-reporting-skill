@@ -1,11 +1,68 @@
 # Number Formatting
 
-> **STATUS: OUTLINE.** Headings are final; prose to be written.
+> **STATUS: OUTLINE**, except *Where formatting lives*, which is written and
+> binding. Headings are final; remaining prose to be written.
 > Style template: [comparison-metrics.md](comparison-metrics.md).
 
 Opening frame to write: formatting is not decoration. Wrong precision, wrong
 separators, or wrong variance colour changes what the reader concludes. This is
 correctness work.
+
+---
+
+## WHERE FORMATTING LIVES
+
+**Formatting belongs in the format string. Never in a calculated field.**
+
+In Power BI that means the measure's format string — static, or a dynamic format
+string when the format has to react to a slicer or a calculation group. In
+Tableau it means the field's **Number Format** (Default Properties, or the
+per-worksheet override). It never means `FORMAT()`, `STR()`, `&`, or a
+concatenated text measure.
+
+This is not a style preference. A number converted to text stops being a number,
+and everything downstream breaks:
+
+| What breaks | Why |
+|---|---|
+| **Locale** | A concatenated string bakes in whatever separator the author had. A pt-BR reader receives `18.5%` where the pack is set to render `18,5%`. |
+| **Sorting** | `"▲ 18,5%"` sorts as text. `"▲ 9,1%"` lands above it. |
+| **Conditional formatting** | Data bars, colour scales, and rule-based backgrounds need a numeric value. A string gets none of them. |
+| **Aggregation** | A string cannot be summed, averaged, or rolled up to a subtotal. |
+| **Export** | Excel and CSV receive dead text. The reader cannot re-format, re-sort, or compute on it. |
+| **Accessibility** | Screen readers and alt text lose the underlying value. |
+| **Maintenance** | Changing precision means editing every calculation instead of one format string. |
+
+### The arrow case
+
+Directional arrows are the most common place this rule gets broken, because
+▲ and ▼ *look* like content. They are not — they are the sign, rendered. Both
+tools express them natively with a sectioned format string:
+
+```
+▲#,##0.0%;▼#,##0.0%;0.0%
+```
+
+The three sections are `positive;negative;zero`. Note that the negative section
+prints the value **without** the minus sign unless you write one in — so
+`-0.185` renders as `▼18,5%`, with the arrow carrying the sign. That is normally
+what you want, and it surprises people the first time.
+
+- **Power BI** — set it on the measure (*Measure tools → Format → Custom*), or
+  as a dynamic format string when the format depends on selection. A fourth
+  section handles text.
+- **Tableau** — *Format → Numbers → Custom*, same syntax. Nulls are handled
+  separately under *Special Values*, not by a fourth section.
+
+❌ `Arrow = IF ( [YoY %] >= 0, "▲", "▼" ) & FORMAT ( [YoY %], "0.0%" )`
+✅ One measure, `YoY %`, with the format string above.
+
+### The narrow exception
+
+A calculation may return text when the text *is* the content — a status label, a
+commentary string, a dynamic title naming the selected period. Even then, keep
+any number inside it to a minimum, and never build a table or tooltip value that
+way.
 
 ---
 
@@ -84,6 +141,8 @@ correctness work.
 
 - Arrows ▲▼ paired with polarity-aware colour, never colour alone
   (accessibility — cross-link to [visual-design.md](visual-design.md)).
+- The arrows come from the format string, not a calculation — see
+  [Where formatting lives](#where-formatting-lives).
 - Show absolute *and* relative variance; one without the other misleads
   (a 300% increase on a base of R$ 12 is not news).
 - Suppress or grey out variance where the base is too small to be meaningful.

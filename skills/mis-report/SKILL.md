@@ -111,11 +111,11 @@ tool's vocabulary into the other's.
 | Force a filter to apply first | Naturally first, unless `REMOVEFILTERS` | **Context filter** (explicit) |
 | Calculation over a result set | Not native; use `RANKX`, window functions | Table calculation (`WINDOW_*`, `INDEX`, `RANK`) |
 | Swap measures dynamically | Field parameters / calculation groups | Parameter + `CASE` calc, parameter actions |
-| Reuse a format across measures | Calculation groups, dynamic format strings | Custom number format per field |
+| Reuse a format across measures | Calculation groups, dynamic format strings | Custom number format per field, set in Default Properties |
 | Restrict rows by user | Row-level security (RLS) roles | User filters / row-level security on the data source |
 | Speed up big data | Import mode, aggregations, composite models | Extracts (`.hyper`), aggregated extracts |
 | Cross-visual interaction | Edit interactions, cross-filter/highlight | Dashboard actions (filter, highlight, parameter) |
-| Formatted text in a tooltip | Measures in the *Tooltips* well; a `FORMAT` string measure for one-line output | Tooltip editor with `<AGG(...)>` tokens — a string calc would discard formatting and locale |
+| Where a number's format lives | Measure format string; **dynamic format strings** when it must react to selection | Field **Number Format** → Custom, with a per-worksheet override. No expression-driven equivalent |
 | Navigate to detail | Drill-through page | Dashboard action to a detail sheet |
 | Diagnostics | Performance Analyzer, DAX Studio | Performance Recorder |
 | Version-controlled source | `.pbip` (folder of text files) | `.twb` (XML) — not `.twbx` |
@@ -129,6 +129,15 @@ Two differences deserve emphasis because they cause most cross-tool confusion:
   that measures may rewrite with `CALCULATE`. There is no "run this filter
   first" — there is only what the filter context contains when the measure
   evaluates.
+
+One rule holds in both tools, without exception:
+
+> **Formatting lives in the format string, never in a calculated field.**
+> No `FORMAT()`, no `STR()`, no concatenating a number into text — not for
+> arrows, not for units, not for signs. A number converted to text loses the
+> reader's locale and can no longer be sorted, aggregated, conditionally
+> formatted, or exported as a number. See
+> [number-formatting.md](number-formatting.md#where-formatting-lives).
 
 ---
 
@@ -300,6 +309,8 @@ Symptoms that something is structurally wrong, and where to look.
 | Huge negative % change | Prior period near zero or negative | [comparison-metrics.md](comparison-metrics.md) |
 | Every month shows a decline | Partial current period | [comparison-metrics.md](comparison-metrics.md) |
 | Cost savings shown in red | Polarity not modelled | [number-formatting.md](number-formatting.md) |
+| A column sorts alphabetically, or won't take conditional formatting | The number was concatenated into text in a calculation | [number-formatting.md](number-formatting.md#where-formatting-lives) |
+| Decimal separators wrong for some readers | Locale hard-coded by a `FORMAT()` in a calculation | [number-formatting.md](number-formatting.md#where-formatting-lives) |
 | Report loads slowly only for some users | RLS applied inefficiently | [performance-governance.md](performance-governance.md) |
 | Two tiles, same label, different value | No single metric definition | This file, above |
 | Users export to Excel to "check it" | Trust gap — reconcile and publish the tie-out | [performance-governance.md](performance-governance.md) |
@@ -317,6 +328,7 @@ Symptoms that something is structurally wrong, and where to look.
 - [ ] Polarity is correct for every variance (cost down = good).
 - [ ] Percentages and percentage points are distinguished in labels.
 - [ ] Number formats are consistent; no false precision.
+- [ ] All formatting lives in format strings — no number concatenated into text.
 - [ ] Chart types match the reader's question; no 3D, no unnecessary pie.
 - [ ] Colour is colourblind-safe and never the only encoding of meaning.
 - [ ] Default filter state is sensible and stated on screen.
